@@ -16,16 +16,16 @@ const ContactList = (props) =>  {
 function App() {
   const contacts = [
     {
-      id: "goodnews",
-      name: "Goodnews Samuel",
-      handle: "@Goodnews_Perfect",
-      avatarURL: "http://localhost:5001/karen.jpg",
-    },
-    {
       id: "richard",
       name: "Richard Kalehoff",
       handle: "@richardkalehoff",
       avatarURL: "http://localhost:5001/richard.jpg",
+    },
+    {
+      id: "goodnews",
+      name: "Goodnews Samuel",
+      handle: "@goodnews_perfect",
+      avatarURL: "http://localhost:5001/karen.jpg",
     },
     {
       id: "tyler",
@@ -36,7 +36,7 @@ function App() {
   ];
 
   return (
-    <div className="App">
+    <div>
       <ListContacts contacts={contacts} />
       <ContactList contacts={[ { name: 'Goodnews' }, { name: 'Egho' }, { name: 'Ozioma' } ]} />
       <ContactList contacts={[ { name: 'Alvin' }, { name: 'Beauty' }, { name: 'Samuel' } ]} />
