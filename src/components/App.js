@@ -1,14 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import '../css/App.css';
+import ListContacts from './ListContacts';
 
 const ContactList = (props) =>  {
   const people = props.contacts;
 
+  return (
+    <ol>
+      {people.map(person => (
+        <li key={person.name}>{person.name}</li>
+      ))}
+    </ol>
+  )
+}
+
+function App() {
   const contacts = [
     {
-      id: "karen",
-      name: "Karen Isgrigg",
-      handle: "karen_isgrigg",
+      id: "goodnews",
+      name: "Goodnews Samuel",
+      handle: "Goodnews_Perfect",
       avatarURL: "http://localhost:5001/karen.jpg",
     },
     {
@@ -26,17 +36,8 @@ const ContactList = (props) =>  {
   ];
 
   return (
-    <ol>
-      {people.map(person => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ol>
-  )
-}
-
-function App() {
-  return (
     <div className="App">
+      <ListContacts contacts={contacts} />
       <ContactList contacts={[ { name: 'Goodnews' }, { name: 'Egho' }, { name: 'Ozioma' } ]} />
       <ContactList contacts={[ { name: 'Alvin' }, { name: 'Beauty' }, { name: 'Samuel' } ]} />
     </div>
