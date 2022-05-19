@@ -16,6 +16,10 @@ const ContactList = (props) =>  {
 }
 
 function App() {
+  const removeContact = (contact) => {
+    setContacts(contacts.filter(c => c.id !== contact.id));
+  }
+
   const [contacts, setContacts] = useState(
     [
       {
@@ -41,7 +45,7 @@ function App() {
 
   return (
     <div>
-      <ListContacts contacts={contacts} />
+      <ListContacts contacts={contacts} onDeleteContact={removeContact} />
       <ContactList contacts={[ { name: 'Goodnews' }, { name: 'Egho' }, { name: 'Ozioma' } ]} />
       <ContactList contacts={[ { name: 'Alvin' }, { name: 'Beauty' }, { name: 'Samuel' } ]} />
     </div>
