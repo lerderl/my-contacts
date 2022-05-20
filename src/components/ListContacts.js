@@ -8,6 +8,10 @@ const ListContacts = ({ contacts, onDeleteContact }) => {
     setQuery(query.trim());
   }
 
+  const clearQuery = () => {
+    updateQuery("");
+  }
+
   const showContacts = query === "" ? contacts : contacts.filter(c => c.name.toLowerCase().includes(query.toLowerCase()))
 
   return (
@@ -21,6 +25,14 @@ const ListContacts = ({ contacts, onDeleteContact }) => {
           onChange={(event) => updateQuery(event.target.value)}
         />
       </div>
+
+      {showContacts.length !== contacts.length && (
+        <div className='showing-contacts'>
+          <span>Now showing {showContacts.length} of {contacts.length}</span>
+          <button onClick={clearQuery}>Show all</button>
+        </div>
+      )}
+
       <ol className="contact-list">
         {console.log(query)}
         {showContacts.map((contact) => (
