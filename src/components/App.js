@@ -1,21 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import '../css/App.css';
 import ListContacts from './ListContacts';
-import * as ContactsAPI from '../utils/ContactsAPI';
 import CreateContact from './CreateContact';
-
-const ContactList = (props) =>  {
-  const people = props.contacts;
-
-  return (
-    <ol>
-      {people.map(person => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ol>
-  )
-}
+import * as ContactsAPI from '../utils/ContactsAPI';
 
 function App() {
   const removeContact = (contact) => {
@@ -24,7 +13,6 @@ function App() {
   }
 
   const [contacts, setContacts] = useState([]);
-  const [screen, setScreen] = useState("list");
 
   useEffect(() => {
     const getContacts = async () => {
@@ -34,47 +22,16 @@ function App() {
 
     getContacts();
   }, []);
-  
-  const [count, setCount] = useState(0);
-
-  // Side effect cleanup
-  useEffect(() => {
-    console.log("This is the side effect.");
-    return () => {
-      console.log(
-        "The component re-rendered. This is part of the cleanup before the next effect."
-      );
-    };
-  });
 
   return (
-    <div>
-      {/* <ListContacts contacts={contacts} onDeleteContact={removeContact} />
-      <CreateContact /> */}
-      {
-        screen === "list" && (
-          <ListContacts
-            contacts={contacts}
-            onDeleteContact={removeContact}
-            onNavigate={() => {
-              setScreen("create");
-            }}
-          />
-        )
-      }
-      {screen === "create" && <CreateContact />}
-      <ContactList contacts={[ { name: 'Goodnews' }, { name: 'Egho' }, { name: 'Ozioma' } ]} />
-      <ContactList contacts={[ { name: 'Alvin' }, { name: 'Beauty' }, { name: 'Samuel' } ]} />
-
-      <p>The current count is: {count}</p>
-      <button
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        Increase the Count
-      </button>
-    </div>
+    <Routes>
+      <Route exact path='/' element={
+        <ListContacts contacts={contacts} onDeleteContact={removeContact} />
+      } />
+      <Route path='/create' element={
+        <CreateContact />
+      } />
+    </Routes>
   );
 }
 
