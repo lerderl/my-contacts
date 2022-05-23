@@ -18,6 +18,7 @@ const ContactList = (props) =>  {
 
 function App() {
   const removeContact = (contact) => {
+    ContactsAPI.remove(contact);
     setContacts(contacts.filter(c => c.id !== contact.id));
   }
 
@@ -31,12 +32,33 @@ function App() {
 
     getContacts();
   }, []);
+  
+  const [count, setCount] = useState(0);
+
+  // Side effect cleanup
+  useEffect(() => {
+    console.log("This is the side effect.");
+    return () => {
+      console.log(
+        "The component re-rendered. This is part of the cleanup before the next effect."
+      );
+    };
+  });
 
   return (
     <div>
       <ListContacts contacts={contacts} onDeleteContact={removeContact} />
       <ContactList contacts={[ { name: 'Goodnews' }, { name: 'Egho' }, { name: 'Ozioma' } ]} />
       <ContactList contacts={[ { name: 'Alvin' }, { name: 'Beauty' }, { name: 'Samuel' } ]} />
+      
+      <p>The current count is: {count}</p>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        Increase the Count
+      </button>
     </div>
   );
 }

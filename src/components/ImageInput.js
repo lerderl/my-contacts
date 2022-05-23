@@ -69,6 +69,7 @@ const ImageInput = ({ maxHeight, className, name }) => {
     }
   };
 
+  // A cleanup sample
   useEffect(() => {
     setCanvas(document.createElement("canvas"));
     fileInput.form.addEventListener("reset", handleFormReset);
