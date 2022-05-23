@@ -11,6 +11,8 @@ const CreateContact = ({ onCreateContact }) => {
     if (onCreateContact) {
       onCreateContact(values);
     }
+
+    console.log("Values:", values);
   }
 
   return (
