@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import '../css/App.css';
 import ListContacts from './ListContacts';
 import * as ContactsAPI from '../utils/ContactsAPI';
+import CreateContact from './CreateContact';
 
 const ContactList = (props) =>  {
   const people = props.contacts;
@@ -23,6 +24,7 @@ function App() {
   }
 
   const [contacts, setContacts] = useState([]);
+  const [screen, setScreen] = useState("create");
 
   useEffect(() => {
     const getContacts = async () => {
@@ -47,10 +49,13 @@ function App() {
 
   return (
     <div>
-      <ListContacts contacts={contacts} onDeleteContact={removeContact} />
+      {/* <ListContacts contacts={contacts} onDeleteContact={removeContact} />
+      <CreateContact /> */}
+      {screen === "list" && (<ListContacts contacts={contacts} onDeleteContact={removeContact} />)}
+      {screen === "create" && <CreateContact />}
       <ContactList contacts={[ { name: 'Goodnews' }, { name: 'Egho' }, { name: 'Ozioma' } ]} />
       <ContactList contacts={[ { name: 'Alvin' }, { name: 'Beauty' }, { name: 'Samuel' } ]} />
-      
+
       <p>The current count is: {count}</p>
       <button
         onClick={() => {
