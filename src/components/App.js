@@ -24,7 +24,7 @@ function App() {
   }
 
   const [contacts, setContacts] = useState([]);
-  const [screen, setScreen] = useState("create");
+  const [screen, setScreen] = useState("list");
 
   useEffect(() => {
     const getContacts = async () => {
@@ -51,7 +51,17 @@ function App() {
     <div>
       {/* <ListContacts contacts={contacts} onDeleteContact={removeContact} />
       <CreateContact /> */}
-      {screen === "list" && (<ListContacts contacts={contacts} onDeleteContact={removeContact} />)}
+      {
+        screen === "list" && (
+          <ListContacts
+            contacts={contacts}
+            onDeleteContact={removeContact}
+            onNavigate={() => {
+              setScreen("create");
+            }}
+          />
+        )
+      }
       {screen === "create" && <CreateContact />}
       <ContactList contacts={[ { name: 'Goodnews' }, { name: 'Egho' }, { name: 'Ozioma' } ]} />
       <ContactList contacts={[ { name: 'Alvin' }, { name: 'Beauty' }, { name: 'Samuel' } ]} />
