@@ -36,7 +36,6 @@ const ListContacts = ({ contacts, onDeleteContact }) => {
       )}
 
       <ol className="contact-list">
-        {console.log(query)}
         {showContacts.map((contact) => (
           <li key={contact.id} className="contact-list-item">
             <div className="contact-avatar" style={{backgroundImage: contact.avatarURL}}></div>
